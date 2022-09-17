@@ -25,7 +25,8 @@ $$10111010$$
 $$11101010$$
 * Lastly we swap every two adjacent bits:
 $$11010101$$
-![[Mirror.png]]
+![Mirror](https://user-images.githubusercontent.com/93342363/190861234-21f69f88-111d-45e7-93b3-4b2e87027f0a.png)
+
 
 #### Generalising Our Observation Into An Algorithm 
 Turns out this is not works, but there's a pattern that allows us to extend this for $2^n$ bits. 
@@ -66,7 +67,8 @@ We have two symmetrical operations:
 If we consider the first we can see that `number & CHOOSE_ADJACENT_SINGLES` basically wipes out all of the bits except those in even places.
 This is because if a bit is in an uneven place it'll be wiped out and replaced with 0, and if it is in an even place it's value will be saved - if it is a 0 then `0&1 = 0`, and if it is a 1 then `1&1 = 1`.
 Afterwards `>> 1` moves those bits to uneven places.
-![[number & adjacent 1.png]]
+![number   adjacent 1](https://user-images.githubusercontent.com/93342363/190861268-d91f1167-6e49-4857-8a88-03342beab47a.png)
+
 The expression `number & ~(CHOOSE_ADJACENT_SINGLES)` does the same, only it selects the bits in the uneven places and moves them to even places with `<<1`.
 
 Thus, the whole first line swaps bits and even places and bits with uneven places.
