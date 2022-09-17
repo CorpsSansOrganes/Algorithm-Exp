@@ -29,13 +29,14 @@ It turns out we could represent in 2 bits the number of set bits that they hold.
 Lets consider the following example:
 $$number = 00110101$$
 If we wish to have in each 2 bits the number of set bits in $number$ we could do the following:
-![[counting_num_of_set_bits_singles.png]]
+![counting_num_of_set_bits_singles](https://user-images.githubusercontent.com/93342363/190861123-4c3dfad2-0dae-471d-85ff-1e95f2a7afec.png)
+
 Now each 2 bits hold the number of set bits in the original bits.
 We can now continue to do so for a [[Nibble]]:
-![[counting_num_of_set_bits_couples.png]]
+![counting_num_of_set_bits_couples](https://user-images.githubusercontent.com/93342363/190861131-ff0896ad-9003-42ac-a1e4-20187598f540.png)
 
 Lastly we would add-up the nibbles to get the total count of set bits:
-![[counting_num_of_set_bits_nibbles.png]]
+![counting_num_of_set_bits_nibbles](https://user-images.githubusercontent.com/93342363/190861139-82593f85-ec28-4383-bbc8-2f358874a766.png)
 
 #### Generalising
 We can see from our example that could easily up-scale the operation for an integer.
@@ -78,7 +79,7 @@ We can break this line of code into two parts
 
 We then add the those two parts together, thus summing the number of bits in every 2 bit as we have described.
 Here's an illustration of what happens in the first line:
-![[line_1_count_set_bits.png]]
+![line_1_count_set_bits](https://user-images.githubusercontent.com/93342363/190861152-2744a8fd-a102-4d4f-a35f-830498b61432.png)
 
 ## A More Complex, More Efficient Implementation
 
@@ -153,7 +154,7 @@ n * SELECT_FIRST_BIT_IN_EVERY_BYTE = (n << 24) + (n << 16) + (n << 8) + n
 ```
 
 Therefore, `(n * SELECT_FIRST_BIT_IN_EVERY_BYTE)` essentially sums all of the bytes in the last byte:
-![[n SELECT_FIRST_BIT.png]]
+![n SELECT_FIRST_BIT](https://user-images.githubusercontent.com/93342363/190861169-94da2d3d-92bd-4523-936a-be3b76dfef73.png)
 
 ```ad-note
 We are not concerned about overflowing as we know that each byte could have up to 8 set bits, or $1000$.
