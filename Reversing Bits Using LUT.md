@@ -4,12 +4,15 @@ Assume we wish to reverse the bits of an integer.
 We could perform it in the following manner (which we'll accommodate with an example `i = 12456` for clarity):
 
 1. Split the integer into byte-size sections.
+
 ![revese_lut_1](https://user-images.githubusercontent.com/93342363/193327590-6239a373-384f-417b-bc84-d6cd238a3fa7.png)
 
 2. Reverse each byte independently.
+
 ![reverse_lut_2](https://user-images.githubusercontent.com/93342363/193327640-15e6dd2a-7dd2-4522-b9ac-1661fdab3072.png)
 
 3. "Stitch" each reverse byte in a reversed order.
+
 ![reverse_lut_3](https://user-images.githubusercontent.com/93342363/193327661-8aa3bad4-badd-4d3d-8d7c-3af19588d4e8.png)
 
 #### Reversing Each Byte Using LUT
@@ -109,6 +112,7 @@ The relationship between the recursively defined $R6$, $R4$ and $R2$ to $BitReve
 Starting to unveil the fog surrounding their relation, we can think of the entire recursion as forming a [[tree]]. The order of the the leafs will be the order of the look-up table.
 
 Here a fragment of that tree representation:
+
 ![reverse_lut_table_as_a_tree](https://user-images.githubusercontent.com/93342363/193327781-2106bba9-ef32-4ef9-9b00-679af6abb008.png)
 
 The leafs, or the values $r_0, r_1, r_2...$ are the values in $BitReverseTable256[0], BitReverseTable256[1], BitReverseTable256[2]...$ respectively.
@@ -160,6 +164,7 @@ Ignoring other complications for the moment, we might notice that here again the
 This is also true for the constants $R6$ which cover the possibilities of the third and forth bits.
 Lastly, the first and second bits are determine by the statement $R6(0), R6(2), R6(1), R6(3)$ - the constants $0,1,2,3$ are nothing more than the four values that could be expressed with the first two bits.
 To summarise, the value of each two bits in the byte are determined by a line in the recursion:
+
 ![reverse_lut_relation_between_bits_and_recursion_levels](https://user-images.githubusercontent.com/93342363/193327817-94634ca5-25f4-4f70-9b93-f27ce6b4bbfa.png)
 
 #### How numbers are constructed gradually in each step of the recursion
@@ -169,6 +174,7 @@ For example, $78=01001110=2^1+2^2+2^3+2^6$.
 Since we have determined that in the first step the first two bits are determined. This is essentially like adding to $n$ either $2^0$ or $2^1$, or both of them or none of them. After the second step we add to either $n$ $2^2$ or $2^3$, or both of them or none of them, and so on.
 
 The way each level of the recursion determines each bit is perhaps best represented again by employing a tree-like representation:
+
 ![reverse_lut_determining_bits_in_four_levels](https://user-images.githubusercontent.com/93342363/193327838-5e773ff5-6674-4013-8f04-1c26f5b73562.png)
 
 ### How does the reversal occurs?
@@ -179,6 +185,7 @@ To understand that last piece of the puzzle, I'll try to give an overview of an 
 Intuitively, we can give the following algorithm for reversing a byte:
 * Reverse the order each two bits
 * Flip each two adjacent bits
+
 ![reverse_lut_reversing_a_byte](https://user-images.githubusercontent.com/93342363/193327864-f95accb3-3ba7-45de-968f-bbe8da320da8.png)
 
 #### Reversing the order
@@ -206,10 +213,12 @@ $R2(0)$ corresponds to the third and forth bits of $n$ being 00.
 Lastly, at the base of the recursion the least significant bits of $n$ are flipped to $01$.
 
 The node at the end of this path in the tree is $r_n=01001001$.
+
 ![reverse_lut_from_n_to_r_n](https://user-images.githubusercontent.com/93342363/193327908-f9da8cae-fcc0-41bb-a26e-8b1735998d29.png)
 
 Employing this understanding can also help us understand why the reverse of any $n$, the value $r_n$, will be in the nth place in the LUT.
 What we should realize is that each step of restricting the bits is at the same time restricting the range of possible $n$s:
+
 ![reverse_lut_restricting_n_ranges](https://user-images.githubusercontent.com/93342363/193327932-4eb4900c-813a-459a-93ae-c73b5edf3f68.png)
 
 
