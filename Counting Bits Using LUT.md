@@ -81,7 +81,10 @@ We are convinced that we get 256 values. Now let's look at how the table is stru
 We can think of the entire recursion as forming a [[tree]]. The order of the leafs will be the order of the look-up table.
 
 Here's a fragment of this tree: 
-![[counting_lut_tree.png]]
+
+![counting_lut_tree](https://user-images.githubusercontent.com/93342363/193350090-23c0034e-3b07-48b1-acc9-efd2791806d1.png)
+
+
 where $v_0, v_1, v_2...$ are the values in $BitSetTable256[0], BitSetTable256[1], BitSetTable256[2]$ etc.
 
 It should be noted that $B6(0), B6(1), B6(1), B6(2)$ each has $\frac{256}{4}=64$ different values. $B6(0)$ has the values $v_0$ up to $v_{63}$, the first $B6(1)$ the values $v_{64}$ up to $v_{127}$ and so on.
@@ -109,7 +112,8 @@ $$B2(0) =\begin{equation}
 Curiously, we see here the same pattern that we see through-out the recursive formulas - $0, 1, 1, 2$.
 We now can understand that this pattern represents the number of set bits in a pair of bits.
 Now, since one of the four lines in our recursion has the same pattern we can guess that each stage of the recursion corresponds to two bits of the byte.
-![[counting_lut_pair_of_bits_and_stage_of_recursion.png]]
+
+![counting_lut_pair_of_bits_and_stage_of_recursion](https://user-images.githubusercontent.com/93342363/193350144-5f4371df-e6de-49ff-9f01-baf09146e5a2.png)
 
 #### The algorithm for counting set bits of a byte
 The code snippet that we've seen above, which computes the values for the LUT, therefore follows the following simple algorithm:
@@ -132,7 +136,9 @@ The forth and third bits which are $01$ correspond to the first $B2(1)$.
 Lastly we have the second and first bits, $11$, corresponding to $n+2$.
 
 This path across the tree could be represented like so:
-![[counting_lut_from_n_to_v_n.png]]
+
+![counting_lut_from_n_to_v_n](https://user-images.githubusercontent.com/93342363/193350175-08def042-8025-45c4-b25b-5f0632ee5e9e.png)
+
 
 We can see that we get the correct number of set bits.
 
@@ -140,7 +146,8 @@ We can see that we get the correct number of set bits.
 We can employ our understanding of the way in which each stage of the recursion restricts the values of $n$ to convince our selves that $v_n$ will be in the nth place of $BitSetTable256$.
 Earlier we made it a point to distinguish between the first $Bn(1)$ and the second $Bn(1)$. That is because each correspond to a different range of $n$s. 
 Looking the same example as before $n=135$:
-![[counting_lut_from_v_n_to_n.png]]
+
+![counting_lut_from_v_n_to_n](https://user-images.githubusercontent.com/93342363/193350239-58a71e62-66c0-4e6c-a13c-c03a0b0057f2.png)
 
 ---
 ```ad-note
